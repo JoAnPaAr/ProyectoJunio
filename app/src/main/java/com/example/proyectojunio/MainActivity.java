@@ -1,8 +1,11 @@
 package com.example.proyectojunio;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.ContentResolver;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -28,15 +31,21 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Cancion> listaCancion;
     private ListView vistaCancion;
 
+    int REQUEST_CODE = 200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Se comprueba que se tengan los métodos necesarios para continuar
+        comprobarPermisos();
+
         play_pause = (Button)findViewById(R.id.boton_play);
         repeat = (Button)findViewById(R.id.boton_repeat);
         iv = (ImageView)findViewById(R.id.reproductor_default);
-        vistaCancion = (ListView)findViewById(R.id.song_list);
+        //vistaCancion = (ListView)findViewById(R.id.song_list);
+
 
         listaCancion = new ArrayList<Cancion>();
         getListaCancion();
@@ -51,25 +60,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //En este metodo se comprueban si se tienen los permisos necesarios para funcionar
+    private void comprobarPermisos() {
+       int permisosLeerExterna = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+       //En caso de no tener permisos de lectura del almacenamiento externo los solicita al usuario
+        if(permisosLeerExterna == PackageManager.PERMISSION_DENIED){
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
+        }
+    }
+
     //Recupera todas las canciones que tiene el dispositivo almacenadas
     public void getListaCancion(){
         ContentResolver musicResolver = getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor musicCursor = musicResolver.query(musicUri,null,null,null,null);
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
+        Cursor musicCursor = musicResolver.query(musicUri,null,selection,null,null);
 
         //Mediante un cursor se recupera la información de cada canción
         if(musicCursor!=null && musicCursor.moveToFirst()){
-            int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+            int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
             int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
             int genreColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.GENRE);
+            int duratColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
             do {
                 //Se inserta en la lista la canción
                 long thisId = musicCursor.getLong(idColumn);
                 String thisTitle = musicCursor.getString(titleColumn);
                 String thisArtist = musicCursor.getString(artistColumn);
                 String thisGenre = musicCursor.getString(genreColumn);
-                listaCancion.add(new Cancion(thisId,thisTitle,thisArtist,thisGenre));
+                String thisDurat = musicCursor.getString(duratColumn);
+                listaCancion.add(new Cancion(thisId,thisTitle,thisArtist,thisGenre,thisDurat));
             }while (musicCursor.moveToNext());
         }
 
@@ -87,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             //En caso de no estar reproduciendo una canción, la reproduce
             //play
             play_pause.setBackgroundResource(R.drawable.img_pause);
+            Toast.makeText(this, "Reproduciendo", Toast.LENGTH_SHORT).show();
 
         }
     }
