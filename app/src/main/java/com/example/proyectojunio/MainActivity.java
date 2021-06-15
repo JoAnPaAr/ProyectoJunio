@@ -1,21 +1,21 @@
 package com.example.proyectojunio;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.navigation.ui.AppBarConfiguration;
+
+import com.example.proyectojunio.model.Cancion;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +23,11 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button play_pause, repeat;
     ImageView iv;
-
-    int repetir = 2, posicion = 0;
+    private AppBarConfiguration mAppBarConfiguration;
+    int posicion = 0;
 
     private ArrayList<Cancion> listaCancion;
-    private ListView vistaCancion;
-
     int REQUEST_CODE = 200;
 
     @Override
@@ -38,14 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Se comprueba que se tengan los métodos necesarios para continuar
+        //Se comprueba que se tengan los permisos necesarios para continuar
         comprobarPermisos();
-
-        play_pause = (Button)findViewById(R.id.boton_play);
-        repeat = (Button)findViewById(R.id.boton_repeat);
-        iv = (ImageView)findViewById(R.id.reproductor_default);
-        //vistaCancion = (ListView)findViewById(R.id.song_list);
-
 
         listaCancion = new ArrayList<Cancion>();
         getListaCancion();
@@ -57,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 return o1.getTitulo().compareTo(o2.getTitulo());
             }
         });
-
     }
 
     //En este metodo se comprueban si se tienen los permisos necesarios para funcionar
@@ -94,25 +84,9 @@ public class MainActivity extends AppCompatActivity {
                 listaCancion.add(new Cancion(thisId,thisTitle,thisArtist,thisGenre,thisDurat));
             }while (musicCursor.moveToNext());
         }
-
     }
     //Con este método se cambia entre reproducir o pausar
-    public void PlayPause (View view){
 
-        if (true){
-            //En caso de estar reproduciendo una canción, se pausará
-            //pause
-            play_pause.setBackgroundResource(R.drawable.img_play);
-            Toast.makeText(this, "Pausa", Toast.LENGTH_SHORT).show();
-
-        }else{
-            //En caso de no estar reproduciendo una canción, la reproduce
-            //play
-            play_pause.setBackgroundResource(R.drawable.img_pause);
-            Toast.makeText(this, "Reproduciendo", Toast.LENGTH_SHORT).show();
-
-        }
-    }
 
     //Con este método se para la reproducción
     public void Stop(View view){

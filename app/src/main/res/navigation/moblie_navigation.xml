@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/moblie_navigation.xml"
+    app:startDestination="@id/nav_canciones">
+
+    <fragment
+        android:id="@+id/nav_canciones"
+        android:name="com.example.proyectojunio.ui.cancion.CancionFragment"
+        android:label="Canciones"
+        tools:layout="@layout/fragment_cancion"></fragment>
+
+    <fragment
+        android:id="@+id/nav_canciones_fav"
+        android:name="com.example.proyectojunio.ui.favoritos.FavoritosFragment"
+        android:label="Favoritos"
+        tools:layout="@layout/fragment_favoritos"></fragment>
+
+    <fragment
+        android:id="@+id/nav_exitos"
+        android:name="com.example.proyectojunio.ui.top.TopFragment"
+        android:label="Populares"
+        tools:layout="@layout/fragment_canciones_top"></fragment>
+
+</navigation>

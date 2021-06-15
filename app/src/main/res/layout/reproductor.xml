@@ -24,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/img_previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_play"
@@ -36,7 +36,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/img_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_repeat"
@@ -46,7 +46,7 @@
         android:id="@+id/boton_play"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/img_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/img_repeat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/img_stop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_atras"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reproductor_default"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.144" />
 
     <TextView
         android:id="@+id/tv_nombreArtista"
@@ -96,6 +96,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nombreCancion"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintVertical_bias="0.106" />
+
+    <Button
+        android:id="@+id/boton_favorito"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/img_star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

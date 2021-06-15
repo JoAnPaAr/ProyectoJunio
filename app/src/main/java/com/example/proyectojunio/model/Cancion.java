@@ -1,4 +1,4 @@
-package com.example.proyectojunio;
+package com.example.proyectojunio.model;
 
 public class Cancion {
 
@@ -7,6 +7,11 @@ public class Cancion {
     private String artista;
     private String genero;
     private String duracion;
+    private boolean favorito;
+    private boolean reproduciendo;
+    public Cancion(){
+
+    }
 
     public Cancion(long id, String titulo, String artista, String genero, String duracion) {
         this.id = id;
@@ -14,6 +19,8 @@ public class Cancion {
         this.artista = artista;
         this.genero = genero;
         this.duracion = duracion;
+        favorito = false;
+        reproduciendo = false;
     }
 
     public long getId() {
@@ -54,5 +61,32 @@ public class Cancion {
 
     public void setDuracion(String duracion) {
         this.duracion = duracion;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
+    public boolean isReproduciendo() {
+        return reproduciendo;
+    }
+
+    public void setReproduciendo(boolean reproduciendo) {
+        this.reproduciendo = reproduciendo;
+    }
+
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", artista='" + artista + '\'' +
+                ", genero='" + genero + '\'' +
+                ", duracion='" + duracion +
+                '}';
     }
 }

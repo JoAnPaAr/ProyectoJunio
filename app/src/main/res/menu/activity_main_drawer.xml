@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/blue_background"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_canciones"
+            android:title="Canciones"
+            android:icon="@drawable/img_canciones"></item>
+        <item
+            android:id="@+id/nav_canciones_fav"
+            android:icon="@drawable/img_star"
+            android:title="Favoritos"></item>
+        <item
+            android:id="@+id/nav_exitos"
+            android:title="Populares"
+            android:icon="@drawable/img_top"></item>
+    </group>
+</menu>
